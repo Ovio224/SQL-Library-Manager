@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  head
+    title Page Not Found
+  body
+    h1 Server Error
+    p Sorry! There was an unexpected error on the server.
+
+  h1= message
+  h2= error.status
+  pre #{error.stack}
