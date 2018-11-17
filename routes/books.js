@@ -4,7 +4,6 @@ var Book = require('../models').Book;
 
 /* GET /books to show all books */
 router.get('/', (req, res, next) => {
-  console.log(Book);
   Book.findAll({order: [["createdAt", "DESC"]]}).then(books => {
     res.render('books/index', {books: books});
   }).catch(err => res.send(500));
