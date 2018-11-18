@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  h1 Deleting #{title}
+  p 
+    | Are you sure you want to delete 
+    strong= book.title
+    | ?
+  form(method="post" action=`/books/book-${book.id}/delete`)
+    a(href="/books/book-" + book.id) No! Take me back!
+    | 
+    input(type="submit", value = "Yes, I am")

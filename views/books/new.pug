@@ -5,7 +5,8 @@ block content
     title New Book
   body
     h1 New Book
-    form(action="/books", method="post")
+    form(action="/books/new", method="post")
+      include formErrors
       p
         label(for='title') Title
         input#title(name='title', type='text', value=book.title)
@@ -22,3 +23,4 @@ block content
         input(type='submit', value='Create New Book')
       p
         a.button(href='/') Cancel
+//- TODO: notification that has been created
