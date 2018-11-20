@@ -8,9 +8,7 @@ router.get('/', (req, res, next) => {
   Book.findAll({
     order: [
       ["createdAt", "DESC"]
-    ],
-    limit: 10,
-    offset: 10
+    ]
   }).then(books => {
     res.render('books/index', {
       books: books

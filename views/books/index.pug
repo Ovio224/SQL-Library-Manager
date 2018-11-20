@@ -2,12 +2,13 @@ extends ../layout
 
 block content
   body
+    .page-header.cf
     h1 Books
     p
       a.button(href='books/new') Create New Book
     table
       thead
-        tr
+        tr.first
           th Title
           th Author
           th Genre

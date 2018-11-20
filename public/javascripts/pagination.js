@@ -1,4 +1,18 @@
 
+  function showBooks (list, page) {
+    const books = document.querySelectorAll('tr');
+    let pageFirstIndex = 10 * page;
+    let pageLastIndex = 10 * (page + 1) - 1;
+    for (let i = 0; i < list.length; i++) {
+      let listIndex = Array.prototype.indexOf.call(books, list[i]);
+
+      if (listIndex >= pageFirstIndex && listIndex <= pageLastIndex) {
+        list[i].style.display = "";
+      } else {
+        list[i].style.display = "none";
+      }
+    }
+  }
 
 const appendPages = list => {
   const pagediv = document.querySelector('.pagination');
@@ -24,7 +38,7 @@ const appendPages = list => {
       // Adding functionality for the pagination links
       if (e.target.textContent == i + 1) {
         // by adding the event listener to the div directly and checking if the pagination's link text is equal to 'i +1'
-        showStudents(list, i); // displaying the students according to which page is being clicked
+        showBooks(list, i); // displaying the students according to which page is being clicked
         e.target.className = "active";
       } else {
         a.className = "inactive";
@@ -32,8 +46,41 @@ const appendPages = list => {
     });
   }
 };
+function searchFunc() {
+  const search = document.querySelector('input');
+  const names = document.querySelectorAll('tbody > tr');
+  // names = names.toLowerCase();
+  search.value = search.value.toLowerCase();
+  const books = document.querySelectorAll('tbody > tr');
+  for (let i = 0; i < books.length; i++) {
+    let li = books[i];
+    if (li) {
+      if (names[i].innerText.toLowerCase().indexOf(search.value) > -1) {
+        li.style.display = "";
+      } else {
+        li.style.display = "none";
+      }
+    }
+  }
+}
 
 
-// setInterval(() => {
-//   appendPages(document.querySelectorAll('tr'));
-// }, 1000);
+if(window.location.pathname === '/books') {
+  document.addEventListener("DOMContentLoaded", function(event) {
+    const books = document.querySelectorAll('tbody > tr');
+    showBooks(books, 0);
+    appendPages(books);
+
+    const divSearch = document.createElement("div");
+    divSearch.className = "student-search";
+    document.querySelector(".page-header").appendChild(divSearch);
+    const search = document.createElement("input");
+    search.type = "text";
+    search.placeholder = "Search for books...";
+    divSearch.appendChild(search);
+    const button = document.createElement("button");
+    button.textContent = "Search";
+    divSearch.appendChild(button);
+    button.addEventListener("click", searchFunc);
+  });
+}
