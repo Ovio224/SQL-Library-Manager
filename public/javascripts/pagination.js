@@ -1,4 +1,4 @@
-
+  // show only the first 10 books
   function showBooks (list, page) {
     const books = document.querySelectorAll('tr');
     let pageFirstIndex = 10 * page;
@@ -13,7 +13,7 @@
       }
     }
   }
-
+  // append pagination func
 const appendPages = list => {
   const pagediv = document.querySelector('.pagination');
   const pagesNeeded = Math.floor(list.length / 10);
@@ -38,7 +38,7 @@ const appendPages = list => {
       // Adding functionality for the pagination links
       if (e.target.textContent == i + 1) {
         // by adding the event listener to the div directly and checking if the pagination's link text is equal to 'i +1'
-        showBooks(list, i); // displaying the students according to which page is being clicked
+        showBooks(list, i); // displaying the books according to which page is being clicked
         e.target.className = "active";
       } else {
         a.className = "inactive";
@@ -46,10 +46,10 @@ const appendPages = list => {
     });
   }
 };
+// search feature comparing the index of the search value to the index of all the letters in a book
 function searchFunc() {
   const search = document.querySelector('input');
   const names = document.querySelectorAll('tbody > tr');
-  // names = names.toLowerCase();
   search.value = search.value.toLowerCase();
   const books = document.querySelectorAll('tbody > tr');
   for (let i = 0; i < books.length; i++) {
@@ -64,13 +64,14 @@ function searchFunc() {
   }
 }
 
-
+ // only loads on the /books url
 if(window.location.pathname === '/books') {
   document.addEventListener("DOMContentLoaded", function(event) {
     const books = document.querySelectorAll('tbody > tr');
     showBooks(books, 0);
     appendPages(books);
 
+    // dynamically insert a search bar into the html
     const divSearch = document.createElement("div");
     divSearch.className = "student-search";
     document.querySelector(".page-header").appendChild(divSearch);
