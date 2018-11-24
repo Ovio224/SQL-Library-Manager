@@ -4,7 +4,7 @@ var Book = require('../models').Book;
 
 
 /* GET /books to show all books */
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   Book.findAll({
     order: [
       ["createdAt", "DESC"]
@@ -20,14 +20,14 @@ router.get('/', (req, res, next) => {
 });
 
 // GET new book
-router.get('/new', (req, res, next) => {
+router.get('/new', (req, res) => {
   res.render('books/new', {
     book: Book.build()
   });
 });
 
 // POST new book
-router.post('/new', (req, res, next) => {
+router.post('/new', (req, res) => {
   Book.create(req.body).then(book => {
     res.redirect(`/books`);
     console.log(book.id)
@@ -47,7 +47,7 @@ router.post('/new', (req, res, next) => {
 });
 
 // GET detailed info about an individual book
-router.get('/book-:id', (req, res, next) => {
+router.get('/book-:id', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
     if (book) {
       res.render('books/update', {
@@ -63,7 +63,7 @@ router.get('/book-:id', (req, res, next) => {
 });
 
 // Edit/update the book
-router.post('/book-:id', (req, res, next) => {
+router.post('/book-:id', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
       if (book) {
         return book.update(req.body);
@@ -90,7 +90,7 @@ router.post('/book-:id', (req, res, next) => {
 });
 
 // GET delete form
-router.get('/book-:id', (req, res, next) => {
+router.get('/book-:id', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
     if (book) {
       res.render('books/delete', {
@@ -103,7 +103,7 @@ router.get('/book-:id', (req, res, next) => {
 
 
 // Delete the book
-router.post('/book-:id/delete', (req, res, next) => {
+router.post('/book-:id/delete', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
       if (book) {
         return book.destroy();
